@@ -32,8 +32,20 @@ export async function GET(req: NextRequest, res: NextResponse) {
       //   });
       // }
 
+      const page: number = Number(searchParams.get('page'));
+      const perPage: number = Number(searchParams.get('perPage'));
+
+      if(!page || !perPage){
+        return new NextResponse(JSON.stringify({ success: false, error: '!page || !perPage)'}), {
+                  status: 500,
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+        });
+      }
       const poolsM: any[] = [];
-      const pools = await getProgramAccounts6(connection, 1, 2);
+      // const pools = await getProgramAccounts6(connection, 1, 2);
+      const pools = await getProgramAccounts6(connection, page, perPage);
       for (let index = 0; index < pools.length; index++) {
         await fetchRpcPoolInfo(String(pools[index])).then(res => poolsM.push(res))
       }
