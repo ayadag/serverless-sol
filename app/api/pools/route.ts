@@ -10,10 +10,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     try {
       const searchParams = await req.nextUrl.searchParams;
-      const perPage = searchParams.get('perPage');
-      console.log('perPage: ', perPage)
+      
       try{ 
-
+        const perPage = searchParams.get('perPage');
+        console.log('perPage: ', perPage)
       } catch (error) {
         return new NextResponse(JSON.stringify({ success: false, error: (error as Error).message as string }), {
               status: 500,
