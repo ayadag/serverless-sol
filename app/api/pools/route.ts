@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-// const SENDER_SECRET_KEY = process.env.SOLANA_SECRET_KEY 
+// const SENDER_SECRET_KEY = process.env.SOLANA_SECRET_KEY //
 //     ? new Uint8Array(process.env.SOLANA_SECRET_KEY.split(',').map(Number)) 
 //     : new Uint8Array([]);
 
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       const searchParams = await req.nextUrl.searchParams;
       const perPage = searchParams.get('perPage');
       console.log('perPage: ', perPage)
-      try{
+      try{ 
 
       } catch (error) {
         return new NextResponse(JSON.stringify({ success: false, error: (error as Error).message as string }), {
