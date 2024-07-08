@@ -15,7 +15,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       const tokenId = searchParams.get('tokenId');
 
       if(!tokenId){
-        return new NextResponse(JSON.stringify({ success: false, error: '!listType || !page || !perPage)'}), {
+        return new NextResponse(JSON.stringify({ success: false, error: '!tokenId)'}), {
                   status: 500,
                   headers: {
                     'Content-Type': 'application/json',
