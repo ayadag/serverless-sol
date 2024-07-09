@@ -16,6 +16,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
                   status: 500,
                   headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                   },
         });
       }
@@ -28,6 +29,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
           status: 200,
           headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
       });
 
@@ -38,6 +40,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         status: 500,
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
       });
     }

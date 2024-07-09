@@ -20,6 +20,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
                   status: 500,
                   headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                   },
         });
       }
@@ -32,6 +33,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
           status: 200,
           headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
       });
 
@@ -42,6 +44,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         status: 500,
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
       });
     }
@@ -68,7 +71,7 @@ async function Token(tokenId: string) {
   const asset = await fetchDigitalAsset(umi, mint) 
   // console.log('asset: ', asset);
   const supply = Number(asset.mint.supply)/1000000000;  //1=1000000000n
-  
+
   const tokenData = {
     publicKey: asset.publicKey,
     owner: asset.mint.header.owner,
