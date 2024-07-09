@@ -1,10 +1,10 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { PublicKey } from '@solana/web3.js';
 import { fetchDigitalAsset } from '@metaplex-foundation/mpl-token-metadata';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
+import { PublicKey } from '@solana/web3.js';
 
 export async function GET(req: NextRequest, res: NextResponse) {
   if (req.method === 'GET') {
@@ -12,7 +12,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
     try {
       const searchParams = await req.nextUrl.searchParams;
 
-      const tokenId = String(searchParams.get('tokenId'));
+      let tokenId = searchParams.get('tokenId');
+      tokenId = String(tokenId);
 
       if(!tokenId){
         return new NextResponse(JSON.stringify({ success: false, error: '!tokenId)'}), {
@@ -23,7 +24,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
         });
       }
 
-      const data = await Token(tokenId);
+      // const tokenM = await Token(tokenId);
+      const tokenM = await Token('Duqm5K5U1H8KfsSqwyWwWNWY5TLB9WseqNEAQMhS78hb');
+      const data = tokenM;
 
       return new NextResponse(JSON.stringify({ success: true, data }), {
           status: 200,
@@ -64,6 +67,8 @@ async function Token(tokenId: string) {
   const mint = fromWeb3JsPublicKey(token);
   const asset = await fetchDigitalAsset(umi, mint) 
   // console.log('asset: ', asset);
+  const supply = Number(asset.mint.supply)/1000000000;  //1=1000000000n
+  
   const tokenData = {
     publicKey: asset.publicKey,
     owner: asset.mint.header.owner,
@@ -73,7 +78,7 @@ async function Token(tokenId: string) {
     symbol: asset.metadata.symbol,
     uri: asset.metadata.uri,
     decimals: asset.mint.decimals,
-    supply: asset.mint.supply,
+    supply: supply,
     executable: asset.mint.header.executable,
   }
   // console.log('tokenData: ', tokenData)
