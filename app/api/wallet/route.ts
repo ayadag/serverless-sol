@@ -51,9 +51,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
         });
       }
 
-      // const tokenM = await Token(tokenId);
-      // const tokenM = await Token('Duqm5K5U1H8KfsSqwyWwWNWY5TLB9WseqNEAQMhS78hb');
-      // const data = tokenM;
       const mData = new getTokensList;
       const data = await mData.getUri(walletKey);
       
@@ -86,35 +83,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-
-// async function Token(tokenId: string) {
-//   // const token = new web3.PublicKey('So11111111111111111111111111111111111111112'); //SOL
-//   // const token = new web3.PublicKey('Duqm5K5U1H8KfsSqwyWwWNWY5TLB9WseqNEAQMhS78hb'); //SALD
-//   const token = new PublicKey(tokenId); //SALD
-//   // const umi = createUmi('https://api.devnet.solana.com', 'processed')
-//   // Use the RPC endpoint of your choice.
-//   // const umi = createUmi('https://api.devnet.solana.com').use(mplTokenMetadata())
-//   const umi = createUmi('https://api.devnet.solana.com')
-//   const mint = fromWeb3JsPublicKey(token);
-//   const asset = await fetchDigitalAsset(umi, mint) 
-//   // console.log('asset: ', asset);
-//   const supply = Number(asset.mint.supply)/1000000000;  //1=1000000000n
-
-//   const tokenData = {
-//     publicKey: asset.publicKey,
-//     owner: asset.mint.header.owner,
-//     mintAuthority: asset.mint.mintAuthority,
-//     updateAuthority: asset.metadata.updateAuthority,
-//     name: asset.metadata.name,
-//     symbol: asset.metadata.symbol,
-//     uri: asset.metadata.uri,
-//     decimals: asset.mint.decimals,
-//     supply: supply,
-//     executable: asset.mint.header.executable,
-//   }
-//   // console.log('tokenData: ', tokenData)
-//   return tokenData
-// }
 
 class getTokensList {
   tokens: token[]= [];
